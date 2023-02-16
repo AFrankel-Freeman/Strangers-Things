@@ -1,4 +1,5 @@
 import React,{ useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 
 const APIURL='https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-AM/users/register'
@@ -20,7 +21,7 @@ const Register = ()=> {
                 username:username,
                 password:password,
             },
-}),
+        }),
     })
 
     const data = await response.json()
@@ -31,7 +32,7 @@ const Register = ()=> {
     setUsername("")
     setPassword("")
 
-    }
+}
     return(
         <div>
             <h1>Register User:</h1>
@@ -46,9 +47,9 @@ const Register = ()=> {
                 />   
                 <label> Password:</label>   
                 <input
-                type="text"
-                value={password}
-                onChange= {(event) => setPassword(event.target.value)}
+                    type="text"
+                    value={password}
+                    onChange= {(event) => setPassword(event.target.value)}
            />     
                 <button type = "submit"> Submit </button>
             </form>
@@ -58,6 +59,7 @@ const Register = ()=> {
                     <h4>Registration Successful</h4>
                 ): ("")
             }
+            <Link to="/login">Already Registered? Click Here!</Link>
 
             
         </div>

@@ -16,22 +16,21 @@ const App = () => {
         <div>
             <Header />
             <Routes>
-                <Route path="/" element={<AllPosts />} ></Route>
-                <Route path="/login" element={<Login />} ></Route>
-                <Route path="/profile" element={<Profile />}></Route>
-                <Route path="/register" element={<Register />}></Route>
-            </Routes>
-            
-        </div>
-       
+            <Route path="/#" element={<App />}></Route>
+                <Route path="posts" element={<AllPosts />} ></Route>
+                <Route path="login" element={<Login />} ></Route>
+                <Route path="profile" element={<Profile />}></Route>
+                <Route path="register" element={<Register />}></Route>
+                
+            </Routes>        
+        </div>  
     )
-        
 };
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
     <HashRouter>
-        <App/>
+        <App />
     </HashRouter>
 );

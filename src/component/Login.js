@@ -1,38 +1,68 @@
 import React, {useState, useEffect} from "react";
-import Register from "./Register";
-import {Link, Routes, Route} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+
+const APIURL='https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-AM/users/login'
 
 const Login = () =>{
-    const [showLoginButton, setShowLoginButton] = useState(true)
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate()
+    let token = ""
 
-    const showRegisterButton = () => {
-        setShowLoginButton(false);
-    }
+    const handleSubmit = async (event) => {
+        // event.preventDefault()
 
-    const backToLoginButton = () => {
-        setShowLoginButton(true);
-    }
+    const response = await fetch (APIURL, {
+        method: "POST",
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: {
+                username: 'username',
+                password: 'password',
+            },
+        }),
+    })
+        .then(response => response.json())
+        .then(result => {
+            token = result.data.token
+            localStorage.setItem("loginToken",token)
+            localStorage.setItem("username",username)
+            console.log("local storage", localStorage)
+            navigate("/posts")
+        })
+        .catch(console.error);
+
+    setUsername("")
+    setPassword("")
+    }   
+    
+    if(!token){
 
     return(
         <div>
-            <form>
-                <input type="text" placeholder="Username"></input>
-                <input type="text" placeholder="Password"></input>
-                {
-                    showLoginButton ? 
-                    <div>
-                        <button> Login</button>
-                        <Link to="/register">Click Here to Register!</Link>
-                    </div>
-                    :
-                    <div> 
-                        <button>Register</button>
-                        <button onClick = {backToLoginButton}>Already Registered? Click Here!</button>
-                    </div>
-                }
+            <h1>Current User:</h1>
+            <form onSubmit={handleSubmit}>
+                <input 
+                    type="text" 
+                    value={username} 
+                    placeholder="Username"
+                    onChange= {(event) => setUsername(event.target.value)}>
+                </input>
+                <input 
+                    type="text" 
+                    value={password} 
+                    placeholder="Password"
+                    onChange= {(event) => setPassword(event.target.value)}>
+                </input>
+                <div>
+                    <button> Login</button>
+                    <Link to="/register">Click Here to Register!</Link>
+                </div>
             </form>
         </div>
-    )
+    )}
 }
 
 export default Login;
