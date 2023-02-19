@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {createRoot} from "react-dom/client";
-import Register from "./component/Register.js";
+import Register from "./component/register.js";
 import {HashRouter, Routes, Route} from 'react-router-dom';
 import AllPosts from "./component/AllPosts.js";
 import Header from "./component/Header.js";
