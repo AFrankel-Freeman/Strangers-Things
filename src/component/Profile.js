@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
+import DeletePost from "./DeletePost";
 
 
 const APIURL='https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-AM/users/me'
-
 const Profile = () => {
     const [profilePosts, setProfilePosts] = useState([])
     
@@ -28,10 +28,11 @@ const Profile = () => {
     return(
       <div>
         <h1>My Post's</h1>
-        {profilePosts.map((posts,i) => {
-          return (
-            <div key={i}>
-              <h2> {posts.title}</h2>
+        
+          {profilePosts.map((posts,i) => {
+            return (
+              <div className="profile-post" key={i}>
+                <h2> {posts.title} <DeletePost /> </h2>
               </div>
           )
         })}

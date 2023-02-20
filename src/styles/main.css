@@ -14,7 +14,7 @@ body{
     justify-items: end;
     justify-content: space-evenly;
 }
-.allposts{
+.allposts, .profile-post{
     border-style: outset;
     padding: 5px;
 }
