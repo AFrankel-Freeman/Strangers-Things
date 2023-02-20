@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 
+
 const APIURL='https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-AM/users/me'
 
 const Profile = () => {
-    const [profileMessages, setProfileMessages] = useState([])
+    const [profilePosts, setProfilePosts] = useState([])
     
 
     useEffect(() => {
@@ -11,14 +12,12 @@ const Profile = () => {
             await fetch(APIURL, {
                 headers: {
                   'Content-Type': 'application/json',
-                  Authorization: `Bearer ${window.localStorage.getItem("loginToken")} `,
-
+                  Authorization: `Bearer ${localStorage.getItem("loginToken")} `
                 },
               }).then(response => response.json())
                 .then(result => {
-                  console.log(result);
-                  setProfileMessages(result.data.messages)
-                  console.log("messages", profileMessages)
+                  const allPosts = result.data.posts
+                  setProfilePosts(allPosts)
                 })
                 .catch(console.error);
         }
@@ -28,7 +27,14 @@ const Profile = () => {
 
     return(
       <div>
-        <h1>Profile</h1>
+        <h1>My Post's</h1>
+        {profilePosts.map((posts,i) => {
+          return (
+            <div key={i}>
+              <h2> {posts.title}</h2>
+              </div>
+          )
+        })}
       </div>
     )
 }

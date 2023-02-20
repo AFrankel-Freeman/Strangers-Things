@@ -7,7 +7,8 @@ const Login = () =>{
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate()
-    let token = ""
+    let token = null
+
 
     const handleSubmit = async (event) => {
         // event.preventDefault()
@@ -30,7 +31,7 @@ const Login = () =>{
             localStorage.setItem("loginToken",token)
             localStorage.setItem("username",username)
             console.log("local storage", localStorage)
-            navigate("/posts")
+            navigate("/")
         })
         .catch(console.error);
 
@@ -44,20 +45,22 @@ const Login = () =>{
     return(
         <div>
             <h1>Current User:</h1>
-            <form onSubmit={handleSubmit}>
+            <form className="boxed-form-login" onSubmit={handleSubmit}>
                 <input 
+                    className="new-post-form"
                     type="text" 
                     value={username} 
                     placeholder="Username"
                     onChange= {(event) => setUsername(event.target.value)}>
                 </input>
                 <input 
+                    className="new-post-form"
                     type="text" 
                     value={password} 
                     placeholder="Password"
                     onChange= {(event) => setPassword(event.target.value)}>
                 </input>
-                <div>
+                <div className="login-register">
                     <button> Login</button>
                     <Link to="/register">Click Here to Register!</Link>
                 </div>

@@ -6,7 +6,8 @@ const NewPost =() => {
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")
     const [willDeliver, setWillDeliver] = useState(false)
-
+    const token = localStorage.getItem("loginToken")
+    
 const postHandler = (title, description, price, willDeliver) => {
     fetch(URL,{
         method: "POST",
@@ -44,25 +45,28 @@ const handlePostChange = (event) => {
 } 
         
  return(
-    <div>
-    <h1> {window.localStorage.getItem("username")}Create New Post:</h1>
-        <form onSubmit = {handleSubmit}>
-        <label> Title:</label>
+    <div>     
+        <h1 className="createposthead"> Create New Post:</h1>
+        <form className="new-post-form" onSubmit = {handleSubmit}>
+        <label className="label-text"> Title:</label>
         <input 
+            className="input-text"
             onChange={handlePostChange}
             placeholder="Title"
             type= "text"
             value= {title}
         />
-        <label> Description:</label>
+        <label className="label-text"> Description:</label>
         <input
+            className="input-text"
             onChange={handlePostChange}
             placeholder="Description"
             type= "text"
             value= {description}
         />
-        <label> Price:</label>
+        <label className="label-text"> Price:</label>
         <input
+            className="input-text"
             onChange={handlePostChange}
             placeholder="Price"
             type= "text"
@@ -73,10 +77,9 @@ const handlePostChange = (event) => {
         type = "checkbox"
         value = {false}
         />
-       
         <button type ="submit" >submit</button>
         </form>
-    </div>
+    </div> 
  )   
 }
 export default NewPost
