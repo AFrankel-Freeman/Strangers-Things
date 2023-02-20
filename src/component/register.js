@@ -1,5 +1,5 @@
 import React,{ useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
 const APIURL='https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-AM/users/register'
@@ -7,6 +7,7 @@ const Register = ()=> {
     const [username, setUsername]= useState("");
     const [password, setPassword]= useState("");
     const [apiResponse, setApiResponse]= useState("")
+    const navigate = useNavigate();
 
     const handleSubmit= async (event) => {
         event.preventDefault()
@@ -27,7 +28,7 @@ const Register = ()=> {
     const data = await response.json()
     setApiResponse(data.success)
 
-
+    navigate("/login");
     
     setUsername("")
     setPassword("")

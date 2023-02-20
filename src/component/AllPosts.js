@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import NewPost from "./NewPost";
+import {Link} from "react-router-dom";
 
 
 const URL='https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-AM/posts';
@@ -28,8 +29,10 @@ const AllPosts = () => {
                 {listOfPosts.map((post,i) => {
                     return (
                         <div className="allposts" key={i}>
-                            <h1 className="posttitle">{post.title}</h1>
-                            <h2 className="postprice">{post.price}</h2>
+                            <Link to={`/post/${i}`} >
+                                <h1 className="posttitle">{post.title}</h1>
+                                <h2 className="postprice">{post.price}</h2>
+                            </Link>
                         </div>
                     )
                 })

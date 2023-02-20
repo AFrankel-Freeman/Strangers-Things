@@ -2,14 +2,13 @@ import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import "../styles/main.css"
 
-const Header = ({isLoggedIn, logout}) => {
-    const [header, setHeader] = useState ("")
+const Header = ({isLoggedIn, setIsLoggedIn}) => {
  
-    const token = localStorage.getItem("loginToken")
+    const token = window.localStorage.getItem("loginToken")
 
     const logOut = ()=>{
-       logout()
-       window.location.reload()
+       window.localStorage.removeItem("loginToken");
+       setIsLoggedIn(false);
     }   
 
     return(
@@ -18,8 +17,11 @@ const Header = ({isLoggedIn, logout}) => {
                 <span className ="logo">Strangers Things</span>
                 <div className="headerlinks">
                     <Link className="headerlink" to="/posts">Home</Link>
-                    { !isLoggedIn && <Link className="headerLink" to="/login">Login/Register</Link>}
-                    {isLoggedIn && <Link className="headerlink" to="/" onClick= {logOut}>Logout</Link>}
+                    { 
+                        isLoggedIn ?
+                        <Link className="headerlink" to="/" onClick= {logOut}>Logout</Link> :
+                        <Link className="headerLink" to="/login">Login/Register</Link> 
+                    }
                     <Link className="headerlink" to="/profile">Profile</Link>
                 </div>
             </header>
