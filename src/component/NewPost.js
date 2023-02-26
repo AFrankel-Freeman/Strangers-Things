@@ -32,10 +32,7 @@ const postHandler = (title, description, price, willDeliver) => {
 } 
 const handleSubmit = (event) =>{
     event.preventDefault()
-    console.log("TDP", title,description,price)
     postHandler(title, description, price)
-    
-
 }
 const handlePostChange = (event) => {
     if(event.target.placeholder === "Title") setTitle(event.target.value)

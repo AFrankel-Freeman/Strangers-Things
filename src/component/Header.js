@@ -27,7 +27,6 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
             </header>
         </div>
     )
-
 }
 
 export default Header;

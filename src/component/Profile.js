@@ -17,22 +17,26 @@ const Profile = () => {
               }).then(response => response.json())
                 .then(result => {
                   const allPosts = result.data.posts
-                  setProfilePosts(allPosts)
+                  let filteredPosts = allPosts.filter(post => post.active === true)
+               
+                  setProfilePosts(filteredPosts)
                 })
                 .catch(console.error);
         }
         getProfile()
     },[]);
-    
+    const refetchPost =() => {
+      getProfile()
+    }
 
     return(
       <div>
-        <h1>My Post's</h1>
-        
+        <h1>My Post's</h1>   
           {profilePosts.map((posts,i) => {
             return (
               <div className="profile-post" key={i}>
-                <h2> {posts.title} <DeletePost /> </h2>
+                <h2> {posts.title} </h2>
+                <DeletePost setProfilePosts={setProfilePosts} profilePosts={profilePosts} onClick ={refetchPost} id={posts._id}/> 
               </div>
           )
         })}

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState } from "react";
 import {Link, useNavigate} from "react-router-dom";
 
 const APIURL='https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-AM/users/login'
@@ -11,7 +11,7 @@ const Login = () =>{
 
 
     const handleSubmit = async (event) => {
-        // event.preventDefault()
+        event.preventDefault()
 
     const response = await fetch (APIURL, {
         method: "POST",
@@ -20,8 +20,8 @@ const Login = () =>{
         },
         body: JSON.stringify({
             user: {
-                username: 'username',
-                password: 'password',
+                username: username,
+                password: password,
             },
         }),
     })
@@ -30,7 +30,6 @@ const Login = () =>{
             token = result.data.token
             localStorage.setItem("loginToken",token)
             localStorage.setItem("username",username)
-            console.log("local storage", localStorage)
             navigate("/")
         })
         .catch(console.error);
@@ -38,8 +37,6 @@ const Login = () =>{
     setUsername("")
     setPassword("")
     }   
-    // "63e821ff21c94600159108c9"
-    
     if(!token){
 
     return(
