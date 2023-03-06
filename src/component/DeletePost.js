@@ -15,7 +15,6 @@ const DeletePost = ({id, setProfilePosts, profilePosts}) => {
           .then(result => {
             let filteredPosts = profilePosts.filter(post => post.active === true)
             setProfilePosts(filteredPosts)
-            console.log(result);
           })
           .catch(console.error);
     }
