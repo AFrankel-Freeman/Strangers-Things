@@ -22,7 +22,6 @@ const App = () => {
 
 
     return (
-        
         <div className="container">
         <Header isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
             <Routes>
